@@ -2,14 +2,19 @@
   (:gen-class)
   (use [clojure.java.shell :only [sh]]))
 
-; (def sites ["http://www.totalwebconnections.com", "https://www.simpleleadtrackers.com", "https://www.lifting-buddys.com"])
-(def connection {:username "peter" :password "" :host "localhost" :DB "pinger"})
+Setup the DB connection details
+(def connection {
+  :username "peter"
+  :password ""
+  :host "localhost"
+  :DB "pinger"})
+
+
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Dumps the DB"
   [& args]
   (def user (str "--user="(connection :username)))
   (def password (str "--password="(connection :password)))
   (def host (str "--host="(connection :host)))
 
-  (sh "mysqldump" user password host (connection :DB) > "/Applications/server/dbtest/leadTracker.sql")
-  )
+  (sh "mysqldump" user password host (connection :DB) > "/path/to/dump/file.sql"))
